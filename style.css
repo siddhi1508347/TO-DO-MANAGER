@@ -1,0 +1,301 @@
+:root {
+  --paper: #FBEFF0;       
+  --card: #FFFDFC;        
+  --ink: #4A2E30;         
+  --ink-soft: #8A6C6E;  
+  --sage: #C97A8B;        
+  --sage-dark: #A85D6E;  
+  --amber: #C98A2C;      
+  --coral: #B44B4B;      
+  --line: #F0D8DC;        
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+  --font-hand: "Caveat", cursive;   
+
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(74, 46, 48, 0.07), 0 4px 12px rgba(74, 46, 48, 0.06);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 2.2rem;
+}
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+.header { margin-bottom: 2.25rem; }
+
+.eyebrow {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--sage-dark);
+  margin-bottom: -0.3rem;
+  transform: rotate(-2deg);   
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: var(--ink);
+}
+
+.date-line {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.composer { margin-bottom: 1.5rem; }
+
+.composer-form {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--card);
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+.task-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.5rem 0.6rem;
+  background: transparent;
+  color: var(--ink);
+}
+
+.task-input::placeholder { color: #9AA4AE; }
+
+.priority-select {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  background: var(--card);
+}
+
+.add-btn {
+  border: none;
+  background: var(--sage);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.add-btn:hover { background: var(--sage-dark); }
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.filters { display: flex; gap: 0.4rem; }
+
+.filter-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 20px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-btn:hover { border-color: var(--line); }
+
+.filter-btn.active {
+  background: var(--sage);
+  color: white;
+}
+
+.stats {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--sage);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  box-shadow: var(--shadow);
+  animation: slideIn 0.18s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* alternating tilt so no two cards look identical */
+.task-item:nth-child(3n+1) { transform: rotate(-0.6deg); }
+.task-item:nth-child(3n+2) { transform: rotate(0.5deg); }
+.task-item:nth-child(3n) { transform: rotate(-0.3deg); }
+
+.task-item:hover {
+  transform: rotate(0deg) translateY(-1px);
+  box-shadow: 0 3px 10px rgba(74, 46, 48, 0.1);
+}
+
+.task-item[data-priority="high"] { border-left-color: var(--coral); }
+.task-item[data-priority="medium"] { border-left-color: var(--amber); }
+.task-item[data-priority="low"] { border-left-color: var(--sage); }
+
+.task-item.completed { opacity: 0.55; }
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.task-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--sage);
+  border-radius: 50%;
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.task-checkbox:checked { background: var(--sage); }
+
+.task-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
+}
+
+.task-body { flex: 1; min-width: 0; }
+
+.task-text {
+  font-size: 0.98rem;
+  word-break: break-word;
+}
+
+.task-meta {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin-top: -0.1rem;
+  text-transform: lowercase;
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.delete-btn:hover { color: var(--coral); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.empty-state {
+  display: none;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.empty-state.visible { display: block; }
+
+.footer {
+  margin-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.clear-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  cursor: pointer;
+}
+
+.clear-btn:hover { color: var(--coral); }
+
+.footer-note {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+:focus-visible {
+  outline: 2px solid var(--sage-dark);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 1.9rem; }
+  .composer-form { flex-wrap: wrap; }
+  .add-btn { flex: 1; padding: 0.6rem; }
+  .priority-select { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-item { animation: none; }
+}
